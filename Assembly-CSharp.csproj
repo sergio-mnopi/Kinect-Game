@@ -47,6 +47,7 @@
      <Compile Include="Assets\KinectScripts\AvatarController.cs" />
      <Compile Include="Assets\KinectScripts\KinectManager.cs" />
      <Compile Include="Assets\KinectScripts\KinectWrapper.cs" />
+     <Compile Include="Assets\KinectScripts\avatar_copy.cs" />
      <Compile Include="Assets\PointMan\PointManController.cs" />
      <Compile Include="Assets\UnderstandBasicsOfCollisions\10_TriggerInScene\GateScript.cs" />
      <Compile Include="Assets\UnderstandBasicsOfCollisions\10_TriggerInScene\LiftDetect.cs" />

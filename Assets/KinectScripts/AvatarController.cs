@@ -11,7 +11,7 @@ public class AvatarController : MonoBehaviour
 {	
 	// Bool that determines whether the avatar is active.
 	public bool Active = true;
-	
+	public bool state=false;
 	// Bool that has the characters (facing the player) actions become mirrored. Default true.
 	public bool MirroredMovement = true;
 	
@@ -63,6 +63,8 @@ public class AvatarController : MonoBehaviour
 	
 	// A required variable if you want to rotate the model in space.
 	public GameObject offsetNode;
+	public GameObject cylinder;
+	
 	
 	// Variable to hold all them bones. It will initialize the same size as initialRotations.
 	private Transform[] bones;
@@ -208,8 +210,8 @@ public class AvatarController : MonoBehaviour
 		KinectManager.Instance.DetectGesture(userId, KinectWrapper.Gestures.Wave);
 		
 		// if you want to get rid of the cursor and click control, comment out the following 2 lines
-		KinectManager.Instance.DetectGesture(userId, KinectWrapper.Gestures.RightHandCursor);
-		KinectManager.Instance.DetectGesture(userId, KinectWrapper.Gestures.Click);
+		//KinectManager.Instance.DetectGesture(userId, KinectWrapper.Gestures.RightHandCursor);
+		//KinectManager.Instance.DetectGesture(userId, KinectWrapper.Gestures.Click);
 		
 		GestureInfo.guiText.text = "SweepLeft, SweepRight, Wave or Click.";
 	}
@@ -233,10 +235,22 @@ public class AvatarController : MonoBehaviour
 		KinectWrapper.SkeletonJoint joint, Vector3 screenPos)
 	{
 		string sGestureText = gesture + " detected";
+		//string ges=gesture.ToString();
+		//bool gest;
+		if((!state)&&gesture.ToString().Equals("SweepLeft")){
+			state=true;
+			print (gesture+" detected");
+			cylinder.transform.Rotate(0,90,0);
+		}
+		if(!gesture.Equals("SweepLeft")&&state){
+			state=false;
+			print ("state converted to false");
+		}
 		if(gesture == KinectWrapper.Gestures.Click)
 			sGestureText += string.Format(" at ({0:F1}, {1:F1})", screenPos.x, screenPos.y);
 		
-		GestureInfo.guiText.text = sGestureText;
+		//GestureInfo.guiText.text = sGestureText;
+		
 		
 		return true;
 	}
