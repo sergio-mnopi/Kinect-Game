@@ -11,7 +11,8 @@ public class AvatarController : MonoBehaviour
 {	
 	// Bool that determines whether the avatar is active.
 	public bool Active = true;
-	public bool state=false;
+	public bool state_right=false;
+	public bool state_left=false;
 	// Bool that has the characters (facing the player) actions become mirrored. Default true.
 	public bool MirroredMovement = true;
 	
@@ -237,14 +238,25 @@ public class AvatarController : MonoBehaviour
 		string sGestureText = gesture + " detected";
 		//string ges=gesture.ToString();
 		//bool gest;
-		if((!state)&&gesture.ToString().Equals("SweepLeft")){
-			state=true;
-			print (gesture+" detected");
+		if((!state_right)&&gesture.ToString().Equals("SweepLeft")){
+			state_right=true;
+			print ("SweepRight detected");
 			cylinder.transform.Rotate(0,90,0);
 		}
-		if(!gesture.Equals("SweepLeft")&&state){
-			state=false;
-			print ("state converted to false");
+	
+		if(!gesture.Equals("SweepLeft")&&state_right){
+			state_right=false;
+			print ("state_right converted to false");
+		}
+		if((!state_left)&&gesture.ToString().Equals("SweepRight")){
+			state_left=true;
+			print ("SweepLeft detected");
+			cylinder.transform.Rotate(0,-90,0);
+		}
+	
+		if(!gesture.Equals("SweepRight")&&state_left){
+			state_left=false;
+			print ("state_left converted to false");
 		}
 		if(gesture == KinectWrapper.Gestures.Click)
 			sGestureText += string.Format(" at ({0:F1}, {1:F1})", screenPos.x, screenPos.y);
