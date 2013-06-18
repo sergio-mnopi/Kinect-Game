@@ -44,6 +44,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Movie.js" />
      <Compile Include="Assets\UnderstandBasicsOfCollisions\10_TriggerInScene\_JSscript\GateScript.js" />
      <Compile Include="Assets\UnderstandBasicsOfCollisions\10_TriggerInScene\_JSscript\LiftDetect.js" />
      <Compile Include="Assets\UnderstandBasicsOfCollisions\10_TriggerInScene\_JSscript\PlayerMove.js" />
@@ -66,6 +67,7 @@
      <Compile Include="Assets\UnderstandBasicsOfCollisions\8_FirstTrigger\_JSscript\Cube2Script.js" />
      <Compile Include="Assets\UnderstandBasicsOfCollisions\9_TriggerForGate\_JSscript\Cube11Script.js" />
      <Compile Include="Assets\UnderstandBasicsOfCollisions\9_TriggerForGate\_JSscript\Cube21Script.js" />
+     <Compile Include="Assets\button.js" />
      <Compile Include="Assets\camera_control.js" />
      <Compile Include="Assets\controller.js" />
      <Compile Include="Assets\error.js" />
