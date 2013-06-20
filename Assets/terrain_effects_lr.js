@@ -28,9 +28,12 @@ var pos_array:Vector3[];
 var terrain_array:GameObject[];
 var quat_clock : Quaternion = Quaternion.AngleAxis(-90,Vector3.up);
 var quat_anti : Quaternion = Quaternion.AngleAxis(90,Vector3.up);
-
+var flag:boolean;
+var track:int;
 
 function Start () {
+track=0;
+flag=true;
 index=0;
 status=Vector3(0,0,size_terrain);
 changed=0;
@@ -66,12 +69,14 @@ pos_array[i*4+3]=terrain_array[i*4+3].transform.position;
 
 function Update () {
 var comp:int;
-if(Input.GetKeyDown("u")){
+if(Input.GetKeyDown("u")&&flag){
+flag=false;
 status=quat_clock*status;
 changed=1;
  
 }
-if(Input.GetKeyDown("i")){
+if(Input.GetKeyDown("i")&&flag){
+flag=false;
 status=quat_anti*status;
 changed=-1;
 print("i pressed and changed="+changed);
@@ -87,6 +92,9 @@ pos_array[index]=pos_array[((index-4)%32+32)%32]+status;
 pos_array[index+1]=pos_array[((index-3)%32+32)%32]+status;
 pos_array[index+2]=pos_array[((index-2)%32+32)%32]+status;
 pos_array[index+3]=pos_array[((index-1)%32+32)%32]+status;
+if(track>4)
+flag=true;
+track+=1;
 }
 else if(changed==-1){
 pos_array[index]=pos_array[((index-4)%32+32)%32]+status*4;
@@ -94,6 +102,7 @@ pos_array[index+1]=pos_array[((index-3)%32+32)%32]+status*3+quat_anti*(1*status)
 pos_array[index+2]=pos_array[((index-2)%32+32)%32]+status*2+quat_anti*(2*status);
 pos_array[index+3]=pos_array[((index-1)%32+32)%32]+status+quat_anti*(3*status);
 changed=0;
+track=0;
 }
 else if(changed==1){
 pos_array[index]=pos_array[((index-4)%32+32)%32]+status+quat_clock*(3*status);
@@ -101,6 +110,7 @@ pos_array[index+1]=pos_array[((index-3)%32+32)%32]+status*2+quat_clock*(2*status
 pos_array[index+2]=pos_array[((index-2)%32+32)%32]+status*3+quat_clock*(1*status);
 pos_array[index+3]=pos_array[((index-1)%32+32)%32]+status*4;
 changed=0;
+track=0;
 }
 index=(index+4)%32;
 }

@@ -9,7 +9,8 @@ function Start () {
     var z : float;
      
     function Update () {
-    x = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+    x = Input.GetAxis("Horizontal") * speed;
     z = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-    transform.Translate(x, 0, z);
+	transform.Rotate(0,x,0);
+    transform.Translate(0, 0, z);
     }
