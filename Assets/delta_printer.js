@@ -5,5 +5,5 @@ function Start () {
 }
 
 function Update () {
-print(Time.deltaTime);
+ print(Time.deltaTime);
 }

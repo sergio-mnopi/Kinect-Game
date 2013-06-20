@@ -5,7 +5,7 @@ var rate:float;
 var terrain0:GameObject;
 var size_terrain:float;
 var tolerance:float;
-/*
+/* 
 var terrain1:GameObject;
 var terrain2:GameObject;
 var terrain3:GameObject;
