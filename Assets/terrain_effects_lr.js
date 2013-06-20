@@ -78,10 +78,10 @@ print("i pressed and changed="+changed);
 }
 //print(changed);
 if(Vector3.Distance(player.transform.position,terrain_array[index+1].transform.position)>(size_terrain+tolerance)&&Vector3.Distance(player.transform.position,terrain_array[index+2].transform.position)>size_terrain+tolerance){
-terrain_array[index+1].transform.Translate(pos_array[((index-3)%32+32)%32]+Random.insideUnitSphere*160);
-terrain_array[index+2].transform.Translate(pos_array[((index-2)%32+32)%32]+Random.insideUnitSphere*160);
-terrain_array[index+3].transform.Translate(pos_array[((index-1)%32+32)%32]+Random.insideUnitSphere*160);
-terrain_array[index].transform.Translate(pos_array[((index-4)%32+32)%32]+Random.insideUnitSphere*160);
+terrain_array[index+1].transform.Translate(pos_array[((index-3)%32+32)%32]+Random.insideUnitSphere*160+Vector3(80,80,0));
+terrain_array[index+2].transform.Translate(pos_array[((index-2)%32+32)%32]+Random.insideUnitSphere*160+Vector3(-80,80,0));
+terrain_array[index+3].transform.Translate(pos_array[((index-1)%32+32)%32]+Random.insideUnitSphere*160+Vector3(80,80,0));
+terrain_array[index].transform.Translate(pos_array[((index-4)%32+32)%32]+Random.insideUnitSphere*160+Vector3(-80,80,0));
 if(changed==0){
 pos_array[index]=pos_array[((index-4)%32+32)%32]+status;
 pos_array[index+1]=pos_array[((index-3)%32+32)%32]+status;
