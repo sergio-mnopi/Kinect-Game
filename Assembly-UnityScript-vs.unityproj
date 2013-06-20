@@ -78,6 +78,7 @@
      <Compile Include="Assets\keyinput.js" />
      <Compile Include="Assets\plane_controller.js" />
      <Compile Include="Assets\swat_controller.js" />
+     <Compile Include="Assets\terrain_effects_lr.js" />
      <None Include="Assets\Hard Surface Free\HardSurface Shaders\HardSurfacePro Hidden Front Cut Out Specular.shader" />
      <None Include="Assets\Hard Surface Free\HardSurface Shaders\HardSurface Free Cut Out Opaque Bump.shader" />
      <None Include="Assets\Hard Surface Free\HardSurface Shaders\HardSurfacePro Hidden Front Transparent.shader" />

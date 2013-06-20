@@ -3,6 +3,8 @@
 var player:GameObject;
 var rate:float;
 var terrain0:GameObject;
+var size_terrain:float;
+var tolerance:float;
 /*
 var terrain1:GameObject;
 var terrain2:GameObject;
@@ -25,55 +27,49 @@ var index:int;
 function Start () {
 index=0;
 terrain0=GameObject.Find("Terrain0");
-Instantiate (terrain0, Vector3(5, 0, 0), Quaternion.identity).name="Terrain1";
-//terrain1=GameObject.Find("Terrain1");
-Instantiate (terrain0,Vector3(0, 0, 5), Quaternion.identity).name="Terrain2";
-//terrain2=GameObject.Find("Terrain2");
-Instantiate (terrain0, Vector3(5, 0, 5), Quaternion.identity).name="Terrain3";
-//terrain3=GameObject.Find("Terrain3");
-Instantiate (terrain0,Vector3(0, 0, 10), Quaternion.identity).name="Terrain4";
-//terrain4=GameObject.Find("Terrain4");
-Instantiate (terrain0, Vector3(5, 0, 10), Quaternion.identity).name="Terrain5";
-//terrain5=GameObject.Find("Terrain5");
-Instantiate (terrain0,Vector3(0, 0, 15), Quaternion.identity).name="Terrain6";
-//terrain6=GameObject.Find("Terrain6");
-Instantiate (terrain0, Vector3(5, 0, 15), Quaternion.identity).name="Terrain7";
-//terrain7=GameObject.Find("Terrain7");
-Instantiate (terrain0,Vector3(0, 0, 20), Quaternion.identity).name="Terrain8";
-//terrain8=GameObject.Find("Terrain8");
-Instantiate (terrain0, Vector3(5, 0, 20), Quaternion.identity).name="Terrain9";
-//terrain9=GameObject.Find("Terrain9");
-Instantiate (terrain0,Vector3(0, 0, 25), Quaternion.identity).name="Terrain10";
-//terrain10=GameObject.Find("Terrain10");
-Instantiate (terrain0, Vector3(5, 0, 25), Quaternion.identity).name="Terrain11";
-//terrain11=GameObject.Find("Terrain11");
-Instantiate (terrain0,Vector3(0, 0, 30), Quaternion.identity).name="Terrain12";
-//terrain12=GameObject.Find("Terrain12");
-Instantiate (terrain0, Vector3(5, 0, 30), Quaternion.identity).name="Terrain13";
-//terrain13=GameObject.Find("Terrain13");
-Instantiate (terrain0,Vector3(0, 0, 35), Quaternion.identity).name="Terrain14";
-//terrain14=GameObject.Find("Terrain14");
-Instantiate (terrain0, Vector3(5, 0, 35), Quaternion.identity).name="Terrain15";
-//terrain15=GameObject.Find("Terrain15");
+Instantiate (terrain0, Vector3(size_terrain, 0, 0), Quaternion.identity).name="Terrain1";
+Instantiate (terrain0,Vector3(2*size_terrain, 0, 0), Quaternion.identity).name="Terrain2";
+Instantiate (terrain0, Vector3(3*size_terrain, 0, 0), Quaternion.identity).name="Terrain3";
+for(var i=1;i<8;i++){
+Instantiate(terrain0,Vector3(0,0,i*size_terrain),Quaternion.identity).name="Terrain"+i*4;
+Instantiate(terrain0,Vector3(size_terrain,0,i*size_terrain),Quaternion.identity).name="Terrain"+(i*4+1);
+Instantiate(terrain0,Vector3(2*size_terrain,0,i*size_terrain),Quaternion.identity).name="Terrain"+(i*4+2);
+Instantiate(terrain0,Vector3(3*size_terrain,0,i*size_terrain),Quaternion.identity).name="Terrain"+(i*4+3);
+}
 
 }
 
 function Update () {
-var temp:Transform;
+
+var temp1:Transform;
 var temp2:Transform;
-temp=GameObject.Find("Terrain"+index).transform;
-if(player.transform.position.z-temp.position.z>8){
+var temp3:Transform;
+var temp4:Transform;
+temp1=GameObject.Find("Terrain"+index).transform;
+if(player.transform.position.z-temp1.position.z>(size_terrain+tolerance)){
 temp2=GameObject.Find("Terrain"+(index+1)).transform;
-temp.Translate(Random.Range(-40,40),Random.Range(-40,40),40);
-temp2.Translate(Random.Range(-40,40),Random.Range(-40,40),40);
-index=(index+2)%16;
+temp3=GameObject.Find("Terrain"+(index+2)).transform;
+temp4=GameObject.Find("Terrain"+(index+3)).transform;
+temp1.Translate(Random.Range(-60,60),Random.Range(2,80),8*size_terrain);
+temp2.Translate(-Random.Range(-60,60),Random.Range(2,80),8*size_terrain);
+temp3.Translate(Random.Range(-60,60),Random.Range(2,80),8*size_terrain);
+temp4.Translate(-Random.Range(-60,60),Random.Range(2,80),8*size_terrain);
+index=(index+4)%32;
 }
 for(var i=0;i<8;i++){
-temp=GameObject.Find("Terrain"+2*i).transform;
-if(temp.position.y!=0){
-temp2=GameObject.Find("Terrain"+(2*i+1)).transform;
-temp.position=Vector3.Lerp(temp.position,Vector3(0,0,temp.position.z),rate);
-temp2.position=Vector3.Lerp(temp2.position,Vector3(5,0,temp2.position.z),rate);
+temp1=GameObject.Find("Terrain"+4*i).transform;
+if(temp1.position.y!=0){
+temp1.position=Vector3.Lerp(temp1.position,Vector3(0,0,temp1.position.z),rate);
+temp2=GameObject.Find("Terrain"+(4*i+1)).transform;
+temp3=GameObject.Find("Terrain"+(4*i+2)).transform;
+temp4=GameObject.Find("Terrain"+(4*i+3)).transform;
+if(temp2.position.y!=0)
+temp2.position=Vector3.Lerp(temp2.position,Vector3(size_terrain,0,temp2.position.z),rate);
+if(temp3.position.y!=0)
+temp3.position=Vector3.Lerp(temp3.position,Vector3(2*size_terrain,0,temp3.position.z),rate);
+if(temp4.position.y!=0)
+temp4.position=Vector3.Lerp(temp4.position,Vector3(3*size_terrain,0,temp4.position.z),rate);
 }
 }
+
 }
