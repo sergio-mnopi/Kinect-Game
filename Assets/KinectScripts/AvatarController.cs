@@ -64,7 +64,7 @@ public class AvatarController : MonoBehaviour
 	
 	// A required variable if you want to rotate the model in space.
 	public GameObject offsetNode;
-	public GameObject cylinder;
+	//public GameObject cylinder;
 	
 	
 	// Variable to hold all them bones. It will initialize the same size as initialRotations.
@@ -241,7 +241,7 @@ public class AvatarController : MonoBehaviour
 		if((!state_right)&&gesture.ToString().Equals("SweepLeft")){
 			state_right=true;
 			print ("SweepRight detected");
-			cylinder.transform.Rotate(0,90,0);
+			//cylinder.transform.Rotate(0,90,0);
 		}
 	
 		if(!gesture.Equals("SweepLeft")&&state_right){
@@ -251,7 +251,7 @@ public class AvatarController : MonoBehaviour
 		if((!state_left)&&gesture.ToString().Equals("SweepRight")){
 			state_left=true;
 			print ("SweepLeft detected");
-			cylinder.transform.Rotate(0,-90,0);
+			//cylinder.transform.Rotate(0,-90,0);
 		}
 	
 		if(!gesture.Equals("SweepRight")&&state_left){
