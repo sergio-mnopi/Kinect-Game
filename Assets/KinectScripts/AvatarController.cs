@@ -1,6 +1,6 @@
 using UnityEngine;
 
-using System;
+//using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -67,7 +67,22 @@ public class AvatarController : MonoBehaviour
 	public GameObject offsetNode;
 	//public GameObject cylinder;
 	
-	public Transform player;
+
+	public GameObject player;
+public float rate;
+public float size_terrain;
+public float tolerance;
+	public float height;
+	public int index;
+public Vector3 status;
+public int changed;
+public Vector3[] pos_array;
+public GameObject[] terrain_array;
+public  Quaternion  quat_clock  = Quaternion.AngleAxis(-90,Vector3.up);
+public Quaternion quat_anti = Quaternion.AngleAxis(90,Vector3.up);
+public bool flag;
+public int track;
+//public Transform Status_tracker;
 	// Variable to hold all them bones. It will initialize the same size as initialRotations.
 	private Transform[] bones;
 	
@@ -85,7 +100,39 @@ public class AvatarController : MonoBehaviour
 	GameObject HandCursor;
 
     public void Start()
-    {	
+    {	track=0;
+flag=true;
+index=0;
+status=new Vector3(0,0,size_terrain);
+//Status_tracker.position=status;
+changed=0;
+
+terrain_array[0]=GameObject.Find("Terrain0");
+pos_array[0]=terrain_array[0].transform.position;
+Instantiate (terrain_array[0],new Vector3(size_terrain, 0, 0), Quaternion.identity).name="Terrain1";
+terrain_array[1]=GameObject.Find("Terrain1");
+pos_array[1]=terrain_array[1].transform.position;
+Instantiate (terrain_array[0],new Vector3(2*size_terrain, 0, 0), Quaternion.identity).name="Terrain2";
+terrain_array[2]=GameObject.Find("Terrain2");
+pos_array[2]=terrain_array[2].transform.position;
+Instantiate (terrain_array[0], new Vector3(3*size_terrain, 0, 0), Quaternion.identity).name="Terrain3";
+terrain_array[3]=GameObject.Find("Terrain3");
+pos_array[3]=terrain_array[3].transform.position;
+for(var i=1;i<8;i++){
+
+Instantiate(terrain_array[0],new Vector3(0,0,i*size_terrain),Quaternion.identity).name="Terrain"+i*4;
+terrain_array[i*4]=GameObject.Find("Terrain"+i*4);
+pos_array[i*4]=terrain_array[i*4].transform.position;
+Instantiate(terrain_array[0],new Vector3(size_terrain,0,i*size_terrain),Quaternion.identity).name="Terrain"+(i*4+1);
+terrain_array[i*4+1]=GameObject.Find("Terrain"+(i*4+1));
+pos_array[i*4+1]=terrain_array[i*4+1].transform.position;
+Instantiate(terrain_array[0],new Vector3(2*size_terrain,0,i*size_terrain),Quaternion.identity).name="Terrain"+(i*4+2);
+terrain_array[i*4+2]=GameObject.Find("Terrain"+(i*4+2));
+pos_array[i*4+2]=terrain_array[i*4+2].transform.position;
+Instantiate(terrain_array[0],new Vector3(3*size_terrain,0,i*size_terrain),Quaternion.identity).name="Terrain"+(i*4+3);
+terrain_array[i*4+3]=GameObject.Find("Terrain"+(i*4+3));
+pos_array[i*4+3]=terrain_array[i*4+3].transform.position;
+}
 		GestureInfo = GameObject.Find("GestureInfo");
 		HandCursor = GameObject.Find("HandCursor");
 		
@@ -104,11 +151,83 @@ public class AvatarController : MonoBehaviour
 		// Set the model to the calibration pose.
         RotateToCalibrationPose(0, KinectManager.IsCalibrationNeeded());
     }
+	public void Update(){
+		//print(status);
+//int comp;
+if(Input.GetKeyDown("u")&&flag){
+flag=false;
+
+status=quat_clock*status;
+//Status_tracker.position=status;
+
+changed=1;
+ 
+}
+if(Input.GetKeyDown("i")&&flag){
+flag=false;
+
+status=quat_anti*status;
+//Status_tracker.position=status;
+
+changed=-1;
+//print("i pressed and changed="+changed);
+}
+//print(changed);
+Vector3 temp=new Vector3(0,height,0);	
+if(Vector3.Distance(player.transform.position-temp,terrain_array[index+1].transform.position)>(size_terrain+tolerance)&&Vector3.Distance(player.transform.position-temp,terrain_array[index+2].transform.position)>size_terrain+tolerance){
+			temp=new Vector3(80,80,0);
+terrain_array[index+1].transform.Translate(pos_array[((index-3)%32+32)%32]+Random.insideUnitSphere*160+temp);
+terrain_array[index+2].transform.Translate(pos_array[((index-2)%32+32)%32]+Random.insideUnitSphere*160+temp);
+terrain_array[index+3].transform.Translate(pos_array[((index-1)%32+32)%32]+Random.insideUnitSphere*160+temp);
+terrain_array[index].transform.Translate(pos_array[((index-4)%32+32)%32]+Random.insideUnitSphere*160+temp);
+if(changed==0){
+pos_array[index]=pos_array[((index-4)%32+32)%32]+status;
+pos_array[index+1]=pos_array[((index-3)%32+32)%32]+status;
+pos_array[index+2]=pos_array[((index-2)%32+32)%32]+status;
+pos_array[index+3]=pos_array[((index-1)%32+32)%32]+status;
+if(track>4)
+flag=true;
+track+=1;
+}
+else if(changed==-1){
+pos_array[index]=pos_array[((index-4)%32+32)%32]+status*4;
+pos_array[index+1]=pos_array[((index-3)%32+32)%32]+status*3+quat_anti*(1*status);
+pos_array[index+2]=pos_array[((index-2)%32+32)%32]+status*2+quat_anti*(2*status);
+pos_array[index+3]=pos_array[((index-1)%32+32)%32]+status+quat_anti*(3*status);
+changed=0;
+track=0;
+
+}
+else if(changed==1){
+pos_array[index]=pos_array[((index-4)%32+32)%32]+status+quat_clock*(3*status);
+pos_array[index+1]=pos_array[((index-3)%32+32)%32]+status*2+quat_clock*(2*status);
+pos_array[index+2]=pos_array[((index-2)%32+32)%32]+status*3+quat_clock*(1*status);
+pos_array[index+3]=pos_array[((index-1)%32+32)%32]+status*4;
+changed=0;
+track=0;
+
+}
+index=(index+4)%32;
+}
+
+for(var i=0;i<8;i++){
+if(terrain_array[4*i].transform.position!=pos_array[4*i])
+terrain_array[4*i].transform.position=Vector3.Lerp(terrain_array[4*i].transform.position,pos_array[4*i],rate);
+if(terrain_array[4*i+1].transform.position!=pos_array[4*i+1])
+terrain_array[4*i+1].transform.position=Vector3.Lerp(terrain_array[4*i+1].transform.position,pos_array[4*i+1],rate);
+if(terrain_array[4*i+2].transform.position!=pos_array[4*i+2])
+terrain_array[4*i+2].transform.position=Vector3.Lerp(terrain_array[4*i+2].transform.position,pos_array[4*i+2],rate);
+if(terrain_array[4*i+3].transform.position!=pos_array[4*i+3])
+terrain_array[4*i+3].transform.position=Vector3.Lerp(terrain_array[4*i+3].transform.position,pos_array[4*i+3],rate);
+}
+
+	}
 	
 	// Update the avatar each frame.
     public void UpdateAvatar(uint UserID, bool IsNearMode)
     {	
 		bool flipJoint = !MirroredMovement;
+		
 		
 		// Update Head, Neck, Spine, and Hips normally.
 		TransformBone(UserID, KinectWrapper.SkeletonJoint.HIPS, 4, flipJoint);
@@ -242,7 +361,10 @@ public class AvatarController : MonoBehaviour
 		if((!state_right)&&gesture.ToString().Equals("SweepLeft")){
 			state_right=true;
 			print ("SweepRight detected");
-			player.Rotate(0,90,0);
+			player.transform.Rotate(0,-90,0);
+			
+			//print (get_status());
+			
 		}
 	
 		if(!gesture.Equals("SweepLeft")&&state_right){
@@ -251,8 +373,12 @@ public class AvatarController : MonoBehaviour
 		}
 		if((!state_left)&&gesture.ToString().Equals("SweepRight")){
 			state_left=true;
+                     state_right=true;
+                        print ("SweepRight detected");
+                        player.transform.Rotate(0,90,0);
+
 			print ("SweepLeft detected");
-			player.Rotate(0,-90,0);
+			player.transform.Rotate(0,90,0);
 		}
 	
 		if(!gesture.Equals("SweepRight")&&state_left){

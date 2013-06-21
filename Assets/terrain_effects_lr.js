@@ -1,6 +1,5 @@
 
 #pragma strict
-
 var player:GameObject;
 var rate:float;
 var size_terrain:float;
@@ -30,12 +29,15 @@ var quat_clock : Quaternion = Quaternion.AngleAxis(-90,Vector3.up);
 var quat_anti : Quaternion = Quaternion.AngleAxis(90,Vector3.up);
 var flag:boolean;
 var track:int;
+var Status_tracker:Transform;
+
 
 function Start () {
 track=0;
 flag=true;
 index=0;
 status=Vector3(0,0,size_terrain);
+Status_tracker.position=status;
 changed=0;
 
 terrain_array[0]=GameObject.Find("Terrain0");
@@ -68,21 +70,28 @@ pos_array[i*4+3]=terrain_array[i*4+3].transform.position;
 }
 
 function Update () {
+//print(status);
 var comp:int;
 if(Input.GetKeyDown("u")&&flag){
 flag=false;
+
 status=quat_clock*status;
+Status_tracker.position=status;
+
 changed=1;
  
 }
 if(Input.GetKeyDown("i")&&flag){
 flag=false;
+
 status=quat_anti*status;
+Status_tracker.position=status;
+
 changed=-1;
-print("i pressed and changed="+changed);
+//print("i pressed and changed="+changed);
 }
 //print(changed);
-if(Vector3.Distance(player.transform.position,terrain_array[index+1].transform.position)>(size_terrain+tolerance)&&Vector3.Distance(player.transform.position,terrain_array[index+2].transform.position)>size_terrain+tolerance){
+if(Vector3.Distance(player.transform.position-Vector3(0,1.529,0),terrain_array[index+1].transform.position)>(size_terrain+tolerance)&&Vector3.Distance(player.transform.position-Vector3(0,1.529,0),terrain_array[index+2].transform.position)>size_terrain+tolerance){
 terrain_array[index+1].transform.Translate(pos_array[((index-3)%32+32)%32]+Random.insideUnitSphere*160+Vector3(80,80,0));
 terrain_array[index+2].transform.Translate(pos_array[((index-2)%32+32)%32]+Random.insideUnitSphere*160+Vector3(-80,80,0));
 terrain_array[index+3].transform.Translate(pos_array[((index-1)%32+32)%32]+Random.insideUnitSphere*160+Vector3(80,80,0));
@@ -103,6 +112,7 @@ pos_array[index+2]=pos_array[((index-2)%32+32)%32]+status*2+quat_anti*(2*status)
 pos_array[index+3]=pos_array[((index-1)%32+32)%32]+status+quat_anti*(3*status);
 changed=0;
 track=0;
+
 }
 else if(changed==1){
 pos_array[index]=pos_array[((index-4)%32+32)%32]+status+quat_clock*(3*status);
@@ -111,6 +121,7 @@ pos_array[index+2]=pos_array[((index-2)%32+32)%32]+status*3+quat_clock*(1*status
 pos_array[index+3]=pos_array[((index-1)%32+32)%32]+status*4;
 changed=0;
 track=0;
+
 }
 index=(index+4)%32;
 }

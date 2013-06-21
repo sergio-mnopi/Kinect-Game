@@ -44,6 +44,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\CreateGUI\Scripts\Editor\CreateGUI_Interface.js" />
      <Compile Include="Assets\Editor\RenderCubemapWizard.js" />
      <Compile Include="Assets\Editor\SkyBoxGenerator.js" />
      <Compile Include="Assets\Editor\deactivateMeshRenderers.js" />
@@ -59,6 +60,7 @@
      <None Include="Assets\Shaders\BackgroundAndCharacters\RealtimeReflectionInWaterFlow.shader" />
      <None Include="Assets\Shaders\Fx\Cursor.shader" />
      <None Include="Assets\Hard Surface Free\HardSurface Shaders\HardSurfacePro Hidden Front Transparent.shader" />
+     <None Include="Assets\CreateGUI\QuickStart\Basic Info.txt" />
      <None Include="Assets\Shaders\Fx\ParticleAdditiveBlend.shader" />
      <None Include="Assets\Hard Surface Free\HardSurface Shaders\HardSurfacePro Hidden Front Transparent Specular.shader" />
      <None Include="Assets\Shaders\Fx\AdditiveBlend.shader" />
@@ -91,6 +93,7 @@
      <None Include="Assets\Hard Surface Free\HardSurface Shaders\HardSurface Free Transparent Diffuse.shader" />
      <None Include="Assets\Shaders\BackgroundAndCharacters\ReflectiveBackgroundPlanar.shader" />
      <None Include="Assets\Hard Surface Free\HardSurface Shaders\HardSurfacePro Hidden Front Cut Out Diffuse.shader" />
+     <None Include="Assets\Necromancer GUI\Kingthings.txt" />
      <None Include="Assets\Shaders\BackgroundAndCharacters\EnemySelfIlluminationReflective.shader" />
      <None Include="Assets\Hard Surface Free\HardSurface Shaders\HardSurface Free Opaque Diffuse.shader" />
      <None Include="Assets\Shaders\BackgroundAndCharacters\AngryInclude.cginc" />
@@ -100,6 +103,7 @@
      <None Include="Assets\Shaders\Fx\ParticleAdditive.shader" />
      <None Include="Assets\Hard Surface Free\HardSurface Shaders\HardSurface Free Opaque Bump.shader" />
      <None Include="Assets\Hard Surface Free\HardSurface Shaders\HardSurface Free Cut Out Opaque Specular.shader" />
+     <None Include="Assets\Necromancer GUI\Readme.txt" />
      <None Include="Assets\Hard Surface Free\HardSurface Shaders\HardSurfacePro Hidden Front Cut Out Bump.shader" />
      <None Include="Assets\Shaders\BackgroundAndCharacters\AlphaCutoutCheapFallback.shader" />
      <None Include="Assets\Hard Surface Free\HardSurface Shaders\HardSurfacePro Hidden Front Transparent Diffuse.shader" />

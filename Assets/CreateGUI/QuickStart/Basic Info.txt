@@ -1,0 +1,17 @@
+Pages: When a page is selected in edit mode, that page will be made visible and all other pages will be hidden. With a custom script any page had be made visible or invisible.
+
+While an element is being dragged, its size can be modified using the arrow keys.
+
+Dragging Elements Around: Elements can only be dragged in Game Mode.
+
+The Data File is a gameObject with a CreateGUI_Data script attached to it.
+This file should be kept as a prefab. This way, changes made in game mode won't be discarded.
+
+Auto GUI Matrix - This resolution scales the GUI according to the current screen size and the native resolution.
+For example: The current resolution is 1000x800, and the native resolution is 500x400
+A button's width is 100px. That button's actual width on screen will be 200px.
+It is recommended that the native resolution is set to a common resolution.
+
+Mobile Developers: Use the Default clickmode as the other clickmodes only register clicks when the left mouse button is pressed. (untested)
+
+
