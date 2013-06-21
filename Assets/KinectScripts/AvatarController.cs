@@ -62,11 +62,12 @@ public class AvatarController : MonoBehaviour
 	
 	public Transform Root;
 	
+	
 	// A required variable if you want to rotate the model in space.
 	public GameObject offsetNode;
 	//public GameObject cylinder;
 	
-	
+	public Transform player;
 	// Variable to hold all them bones. It will initialize the same size as initialRotations.
 	private Transform[] bones;
 	
@@ -214,7 +215,7 @@ public class AvatarController : MonoBehaviour
 		//KinectManager.Instance.DetectGesture(userId, KinectWrapper.Gestures.RightHandCursor);
 		//KinectManager.Instance.DetectGesture(userId, KinectWrapper.Gestures.Click);
 		
-		GestureInfo.guiText.text = "SweepLeft, SweepRight, Wave or Click.";
+		//GestureInfo.guiText.text = "SweepLeft, SweepRight, Wave or Click.";
 	}
 	
 	// Invoked when a gesture is in progress 
@@ -241,7 +242,7 @@ public class AvatarController : MonoBehaviour
 		if((!state_right)&&gesture.ToString().Equals("SweepLeft")){
 			state_right=true;
 			print ("SweepRight detected");
-			//cylinder.transform.Rotate(0,90,0);
+			player.Rotate(0,90,0);
 		}
 	
 		if(!gesture.Equals("SweepLeft")&&state_right){
@@ -251,7 +252,7 @@ public class AvatarController : MonoBehaviour
 		if((!state_left)&&gesture.ToString().Equals("SweepRight")){
 			state_left=true;
 			print ("SweepLeft detected");
-			//cylinder.transform.Rotate(0,-90,0);
+			player.Rotate(0,-90,0);
 		}
 	
 		if(!gesture.Equals("SweepRight")&&state_left){
