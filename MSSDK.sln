@@ -11,6 +11,8 @@ Project("{5EFD43EE-01CD-6A7B-E42F-DE5C5F8A80B1}") = "MSSDK", "Assembly-UnityScri
 EndProject
 Project("{5EFD43EE-01CD-6A7B-E42F-DE5C5F8A80B1}") = "MSSDK", "Assembly-UnityScript.unityproj", "{1E096482-8DBC-2148-E040-614343990098}"
 EndProject
+Project("{5EFD43EE-01CD-6A7B-E42F-DE5C5F8A80B1}") = "MSSDK", "Assembly-UnityScript-Editor.unityproj", "{590EFF34-0C34-7257-673C-1E0CAFC27AD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,11 +39,15 @@ Global
 		{1E096482-8DBC-2148-E040-614343990098}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E096482-8DBC-2148-E040-614343990098}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E096482-8DBC-2148-E040-614343990098}.Release|Any CPU.Build.0 = Release|Any CPU
+		{590EFF34-0C34-7257-673C-1E0CAFC27AD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{590EFF34-0C34-7257-673C-1E0CAFC27AD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{590EFF34-0C34-7257-673C-1E0CAFC27AD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{590EFF34-0C34-7257-673C-1E0CAFC27AD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																																												GlobalSection(MonoDevelopProperties) = preSolution
+																																																																																																			GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
