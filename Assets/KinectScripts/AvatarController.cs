@@ -75,6 +75,7 @@ public float tolerance;
 	public float height;
 	public int index;
 public Vector3 status;
+	public Vector3 status_player;
 public int changed;
 public Vector3[] pos_array;
 public GameObject[] terrain_array;
@@ -104,6 +105,7 @@ public int track;
 flag=true;
 index=0;
 status=new Vector3(0,0,size_terrain);
+status_player=new Vector3(0,0,1);
 //Status_tracker.position=status;
 changed=0;
 
@@ -358,33 +360,58 @@ terrain_array[4*i+3].transform.position=Vector3.Lerp(terrain_array[4*i+3].transf
 		string sGestureText = gesture + " detected";
 		//string ges=gesture.ToString();
 		//bool gest;
-		if((!state_right)&&gesture.ToString().Equals("SweepLeft")){
+		
+		if(
+			//(!state_right)&&
+			gesture.ToString().Equals("SweepLeft")){
 			state_right=true;
 			print ("SweepRight detected");
 			player.transform.Rotate(0,-90,0);
+			status_player=quat_clock*status_player;
 			
-			//print (get_status());
 			
 		}
 	
-		if(!gesture.Equals("SweepLeft")&&state_right){
+		/*if(!gesture.Equals("SweepLeft")&&state_right){
 			state_right=false;
 			print ("state_right converted to false");
-		}
-		if((!state_left)&&gesture.ToString().Equals("SweepRight")){
+		}*/
+		
+		if(//(!state_left)&&
+			gesture.ToString().Equals("SweepRight")){
 			state_left=true;
                      state_right=true;
-                        print ("SweepRight detected");
+                        print ("SweepLeft detected");
                         player.transform.Rotate(0,90,0);
-
+			status_player=quat_anti*status_player;
+			/*
 			print ("SweepLeft detected");
-			player.transform.Rotate(0,90,0);
+			player.transform.Rotate(0,90,0);*/
 		}
-	
-		if(!gesture.Equals("SweepRight")&&state_left){
+	if(status_player*size_terrain==status&&state_right){
+				//print ("enterd in condition 1");
+				if(status.x!=0){
+					print ("enterd in condition 1");
+					if((player.transform.position.z-terrain_array[((index-4)%32+32)%32].transform.position.z)*(player.transform.position.z-terrain_array[((index-1)%32+32)%32].transform.position.z)<0){
+					print ("initial position="+player.transform.position.ToString());
+						player.transform.Translate(0,0,(terrain_array[((index-4)%32+32)%32].transform.position.z+terrain_array[((index-1)%32+32)%32].transform.position.z)/2-player.transform.position.z);
+				print ("final position="+player.transform.position.ToString());	
+				}
+				}
+				else if(status.z!=0){
+					print ("enterd in condition 2");
+					if((player.transform.position.x-terrain_array[((index-4)%32+32)%32].transform.position.x)*(player.transform.position.x-terrain_array[((index-1)%32+32)%32].transform.position.x)<0){
+						print ("initial position="+player.transform.position.ToString());
+						player.transform.Translate((terrain_array[((index-4)%32+32)%32].transform.position.x+terrain_array[((index-1)%32+32)%32].transform.position.x)/2-player.transform.position.z,0,0);
+					    print ("final position="+player.transform.position.ToString());
+					}
+				}
+		state_right=false;	
+		}
+		/*if(!gesture.Equals("SweepRight")&&state_left){
 			state_left=false;
 			print ("state_left converted to false");
-		}
+		}*/
 		if(gesture == KinectWrapper.Gestures.Click)
 			sGestureText += string.Format(" at ({0:F1}, {1:F1})", screenPos.x, screenPos.y);
 		
