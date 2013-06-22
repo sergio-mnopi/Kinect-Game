@@ -1,14 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\KinectScripts\AvatarController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\controller.js">
     <Files>
-      <File FileName="Assets\KinectScripts\AvatarController.cs" Line="413" Column="15" />
+      <File FileName="Assets\KinectScripts\AvatarController.cs" Line="1" Column="1" />
       <File FileName="Assets\KinectScripts\KinectManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\terrain_effects_lr.js" Line="139" Column="1" />
-      <File FileName="Assets\controller.js" Line="1" Column="1" />
-      <File FileName="Assets\CreateGUI\Scripts\Editor\CreateGUI_Interface.js" Line="1" Column="1" />
-      <File FileName="Assets\hover.js" Line="1" Column="1" />
       <File FileName="Assets\Standard Assets\Character Controllers\Sources\Scripts\CharacterMotor.js" Line="1" Column="1" />
+      <File FileName="Assets\gamepause.js" Line="1" Column="1" />
+      <File FileName="Assets\terrain_effects_lr.js" Line="1" Column="1" />
+      <File FileName="Assets\controller.js" Line="14" Column="1" />
+      <File FileName="Assets\hover.js" Line="8" Column="28" />
+      <File FileName="Assets\pause_menu.js" Line="281" Column="39" />
+      <File FileName="Assets\CreateGUI\Scripts\Editor\CreateGUI_Interface.js" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
